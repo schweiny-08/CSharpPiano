@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MusicNote.cs" />
     <Compile Include="BlackMusKey.cs">
       <SubType>Component</SubType>
     </Compile>
