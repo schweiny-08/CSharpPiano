@@ -17,6 +17,9 @@ namespace PianoApp
         private Bitmap noteShape;
         private byte noteDuration;
         private Accid _accid;
+      
+        public Point Location { get; internal set; }
+      
         public MusicNote(int p, Bitmap shape, byte duration, Accid a) {
             pitch = p;
             noteShape = shape;
