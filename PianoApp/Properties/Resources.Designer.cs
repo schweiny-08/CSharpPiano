@@ -220,8 +220,7 @@ namespace PianoApp.Properties {
             get {
                 return ResourceManager.GetStream("_25", resourceCulture);
             }
-        }
-        
+        } 
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
