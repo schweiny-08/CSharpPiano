@@ -30,7 +30,6 @@ namespace PianoApp
         {
             InitializeComponent();
             timer1 = new System.Timers.Timer();
-            //sp.SoundLocation = @"C:\Users\schem\OneDrive\Desktop\Desktop\Software Development\Year 2 Semester 1\CIS2201 - OOP (Java and C# for .NET)\Assignment\Piano\Piano\Resources";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -71,15 +70,91 @@ namespace PianoApp
                         timer1.Enabled = true;
                         count = 0;
                         timer1.Start();
-                        //sp.SoundLocation = mk.notePitch.ToString() + ".wav";
-                        //sp.SoundLocation = @"C:\Users\schem\OneDrive\Desktop\Desktop\Software Development\Year 2 Semester 1\CIS2201 - OOP (Java and C# for .NET)\Assignment\Piano\Piano\Resources\" + mk.notePitch.ToString() + ".wav";
-                        //sp.SoundLocation = Properties.Resources.mk.notePitch;
-                        //sp.SoundLocation = @"Properties\Resources.resx\" + mk.notePitch.ToString() + ".wav";
+
                         note = mk.notePitch.ToString() + ".wav";
-                        //string location = Properties.Resources.ResourceManager.GetString(note);
-                        //sp.SoundLocation = location;
-                        //var location = Properties.Resources.ResourceManager.GetString(note);
-                        sp.SoundLocation = Properties.Resources.ResourceManager.GetString(note);
+
+                        switch (note)
+                        {
+                            case "1.wav":
+                                sp.Stream = Properties.Resources._1;
+                                break;
+                            case "2.wav":
+                                sp.Stream = Properties.Resources._2;
+                                break;
+                            case "3.wav":
+                                sp.Stream = Properties.Resources._3;
+                                break;
+                            case "4.wav":
+                                sp.Stream = Properties.Resources._4;
+                                break;
+                            case "5.wav":
+                                sp.Stream = Properties.Resources._5;
+                                break;
+                            case "6.wav":
+                                sp.Stream = Properties.Resources._6;
+                                break;
+                            case "7.wav":
+                                sp.Stream = Properties.Resources._7;
+                                break;
+                            case "8.wav":
+                                sp.Stream = Properties.Resources._8;
+                                break;
+                            case "9.wav":
+                                sp.Stream = Properties.Resources._9;
+                                break;
+                            case "10.wav":
+                                sp.Stream = Properties.Resources._10;
+                                break;
+                            case "11.wav":
+                                sp.Stream = Properties.Resources._11;
+                                break;
+                            case "12.wav":
+                                sp.Stream = Properties.Resources._12;
+                                break;
+                            case "13.wav":
+                                sp.Stream = Properties.Resources._13;
+                                break;
+                            case "14.wav":
+                                sp.Stream = Properties.Resources._14;
+                                break;
+                            case "15.wav":
+                                sp.Stream = Properties.Resources._15;
+                                break;
+                            case "16.wav":
+                                sp.Stream = Properties.Resources._16;
+                                break;
+                            case "17.wav":
+                                sp.Stream = Properties.Resources._17;
+                                break;
+                            case "18.wav":
+                                sp.Stream = Properties.Resources._18;
+                                break;
+                            case "19.wav":
+                                sp.Stream = Properties.Resources._19;
+                                break;
+                            case "20.wav":
+                                sp.Stream = Properties.Resources._20;
+                                break;
+                            case "21.wav":
+                                sp.Stream = Properties.Resources._21;
+                                break;
+                            case "22.wav":
+                                sp.Stream = Properties.Resources._22;
+                                break;
+                            case "23.wav":
+                                sp.Stream = Properties.Resources._23;
+                                break;
+                            case "24.wav":
+                                sp.Stream = Properties.Resources._24;
+                                break;
+                            case "25.wav":
+                                sp.Stream = Properties.Resources._25;
+                                break;
+                            default:
+                                Console.WriteLine("Default case");
+                                break;
+                        }
+
                         sp.Play();
                     }
         }
