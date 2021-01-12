@@ -118,6 +118,78 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bar.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blank.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Crotchet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Crotchet.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrotchetR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CrotchetR.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DotMin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DotMin.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DotMinim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DotMinim.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flat.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Flat1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Flat1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minim.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinimR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MinimR.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Natural" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Natural.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Natural1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Natural1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PNG_format" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PNG format.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Quaver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Quaver.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QuaverR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuaverR.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SemiBreve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SemiBreve.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SemiBreveR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SemiBreveR.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SemiQuaver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SemiQuaver.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SemiQuaverR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SemiQuaverR.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sharp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sharp.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sharp1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sharp1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Staff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Staff.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Staff2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Staff2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Treble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Treble.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -177,6 +249,9 @@
   </data>
   <data name="_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_44" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\44.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

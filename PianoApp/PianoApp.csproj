@@ -162,5 +162,80 @@
   <ItemGroup>
     <None Include="Resources\19.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\44.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blank.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Crotchet.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CrotchetR.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DotMin.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DotMinim.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flat.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flat1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minim.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MinimR.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Natural.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Natural1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PNG format.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Quaver.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuaverR.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SemiBreve.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SemiBreveR.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SemiQuaver.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SemiQuaverR.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sharp.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sharp1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Staff.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Staff2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Treble.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
