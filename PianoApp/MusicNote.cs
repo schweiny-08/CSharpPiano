@@ -27,7 +27,7 @@ namespace PianoApp
 
     class MusicNote : PictureBox
     {
-        public Point Location { get; internal set; }
+        //public Point Location { get; internal set; }
 
         private MusicNoteShape mns;
         private ResourceManager rm = Properties.Resources.ResourceManager;
@@ -44,7 +44,7 @@ namespace PianoApp
             noteDuration = duration;
             noteShape = nShape;
            
-            this.Location = new Point(100, 50);
+            Location = new Point(x, 10);
             Size = new Size(30, 35);
             Bitmap bmp = (Bitmap)rm.GetObject(noteShape);
             bmp.MakeTransparent(Color.White);

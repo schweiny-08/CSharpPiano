@@ -19,7 +19,7 @@ namespace PianoApp
         List<MusicNote> Notes = new List<MusicNote>();
 
         int count = 0;
-        int xLoc = 50;
+        int xLoc = 0;
         int yLoc = 30;
         string note = "";
         private SoundPlayer sp = new SoundPlayer();
@@ -228,12 +228,13 @@ namespace PianoApp
 
                         //Adding music note to staff 
                         MusicNote mn = new MusicNote(mk.notePitch, duration, bNoteShape, xLoc);
-                        mn.Location = new Point(xLoc, yLoc);
+                        //mn.Location = new Point(xLoc, yLoc);
                         this.panel2.Controls.Add(mn);
                         this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
                         Notes.Add(mn);
+                        Console.WriteLine("LOCATION" + mn.Location);
                         xLoc += 40;
-                        Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc);
+                        Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
                         //mn.BackColor = Color.Transparent;
                     }
                 }
