@@ -49,13 +49,18 @@
     <Compile Include="BlackMusKey.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MusicStaff.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MusicNote.cs" />
+    <Compile Include="MusicNote.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MusKey.cs">
       <SubType>Component</SubType>
     </Compile>
