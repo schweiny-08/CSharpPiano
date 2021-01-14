@@ -226,13 +226,14 @@ namespace PianoApp
                             duration = 1;
                         }
 
-                        //Adding music note to staff
+                        //Adding music note to staff 
                         MusicNote mn = new MusicNote(mk.notePitch, duration, bNoteShape, xLoc);
-                        //mn.Location = new Point(xLoc, yLoc);
-                        this.staffPB.Controls.Add(mn);
+                        mn.Location = new Point(xLoc, yLoc);
+                        this.panel2.Controls.Add(mn);
+                        this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
                         Notes.Add(mn);
-                        xLoc += 30;
-                        Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count);
+                        xLoc += 40;
+                        Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc);
                         //mn.BackColor = Color.Transparent;
                     }
                 }

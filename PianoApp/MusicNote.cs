@@ -44,7 +44,7 @@ namespace PianoApp
             noteDuration = duration;
             noteShape = nShape;
            
-            this.Location = new Point(x, 50);
+            this.Location = new Point(100, 50);
             Size = new Size(30, 35);
             Bitmap bmp = (Bitmap)rm.GetObject(noteShape);
             bmp.MakeTransparent(Color.White);
