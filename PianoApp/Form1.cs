@@ -233,7 +233,7 @@ namespace PianoApp
                         this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
                         Notes.Add(mn);
                         Console.WriteLine("LOCATION" + mn.Location);
-                        xLoc += 40;
+                        xLoc += 35;
                         Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
                         //mn.BackColor = Color.Transparent;
                     }
