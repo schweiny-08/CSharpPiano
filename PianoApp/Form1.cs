@@ -18,6 +18,7 @@ namespace PianoApp
         PictureBox staffPB = new PictureBox();
         List<MusicNote> Notes = new List<MusicNote>();
 
+        int staffPBPadding = 35;
         int count = 0;
         int xLoc = 0;
         int yLoc = 30;
@@ -72,9 +73,12 @@ namespace PianoApp
             
             panel2.Controls.Add(staffPB);
             staffPB.Width = staff.Width;
-            staffPB.Height = staff.Height;
+            staffPB.Height = staff.Height + staffPBPadding;
+            staffPB.BackColor = Color.White;
             staffPB.BorderStyle = BorderStyle.FixedSingle;
             staffPB.Image = staff;
+            staffPB.Padding = new Padding(0, 40, 0 ,0);
+            //staffPB.Location = new Point(staffPB.Location.X, 20); ;
 
             //staffPB.Controls.Add(bar);
         }
@@ -180,7 +184,7 @@ namespace PianoApp
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            count = count++;
+            count++;
         }
 
         private void button1_MouseUp(object sender, MouseEventArgs e)
@@ -227,9 +231,10 @@ namespace PianoApp
                         }
 
                         //Adding music note to staff 
-                        MusicNote mn = new MusicNote(mk.notePitch, duration, bNoteShape, xLoc);
+                        MusicNote mn = new MusicNote(mk.notePitch, duration, bNoteShape, xLoc, staffPBPadding);
                         //mn.Location = new Point(xLoc, yLoc);
-                        this.panel2.Controls.Add(mn);
+                        //this.panel2.Controls.Add(mn);
+                        staffPB.Controls.Add(mn);
                         this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
                         Notes.Add(mn);
                         Console.WriteLine("LOCATION" + mn.Location);
