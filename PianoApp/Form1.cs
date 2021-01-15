@@ -15,8 +15,11 @@ namespace PianoApp
 {
     public partial class Form1 : Form
     {
+        PictureBox staffPB = new PictureBox();
+        List<MusicNote> Notes = new List<MusicNote>();
+
         int count = 0;
-        int xLoc = 50;
+        int xLoc = 0;
         int yLoc = 30;
         string note = "";
         private SoundPlayer sp = new SoundPlayer();
@@ -36,6 +39,8 @@ namespace PianoApp
         {
             MusKey mk;
             BlackMusKey bmk;
+
+            //White Key
             for (int k = 0; k <= 14; k++)
             {
                 int pitch = whitePitch[k];
@@ -46,6 +51,7 @@ namespace PianoApp
                 this.panel1.Controls.Add(mk);
             }
 
+            //Black Key
             int xOffs = 20;
             for (int k = 0; k < 10; k++)
             {
@@ -58,6 +64,19 @@ namespace PianoApp
                 this.panel1.Controls[this.panel1.Controls.Count - 1].BringToFront();
             }
 
+            //Music Staff
+
+            Bitmap staff = Properties.Resources.Staff2;
+            Bitmap bar = Properties.Resources.Bar;
+
+            
+            panel2.Controls.Add(staffPB);
+            staffPB.Width = staff.Width;
+            staffPB.Height = staff.Height;
+            staffPB.BorderStyle = BorderStyle.FixedSingle;
+            staffPB.Image = staff;
+
+            //staffPB.Controls.Add(bar);
         }
 
 
@@ -178,7 +197,7 @@ namespace PianoApp
                         int duration = 0;
                         if (count >= 16)
                         {
-                            bNoteShape = "SemiBrave";
+                            bNoteShape = "SemiBreve";
                             duration = 16;
                         }
                         if ((count >= 11) && (count <= 15))
@@ -207,11 +226,16 @@ namespace PianoApp
                             duration = 1;
                         }
 
-
-                        MusicNote mn = new MusicNote(mk.notePitch, duration, bNoteShape);
-                        mn.Location = new Point(xLoc, yLoc);
-                        //this.panel2.Controls.Add(this.mn);
-                        xLoc = xLoc + 15;
+                        //Adding music note to staff 
+                        MusicNote mn = new MusicNote(mk.notePitch, duration, bNoteShape, xLoc);
+                        //mn.Location = new Point(xLoc, yLoc);
+                        this.panel2.Controls.Add(mn);
+                        this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
+                        Notes.Add(mn);
+                        Console.WriteLine("LOCATION" + mn.Location);
+                        xLoc += 35;
+                        Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
+                        //mn.BackColor = Color.Transparent;
                     }
                 }
             }
