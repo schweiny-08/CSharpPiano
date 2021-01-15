@@ -35,11 +35,11 @@ namespace PianoApp
         private int pitch, startingY = 69;
         private String noteShape;
         private bool isDragging = false;
-        private int noteDuration;
+        private double noteDuration;
 
         //private Accid _accid;
 
-        public MusicNote(int p,  int duration, String nShape, int x, int paddingCompensation) : base()
+        public MusicNote(int p,  double duration, String nShape, int x, int paddingCompensation) : base()
         {
             pitch = p;
             noteDuration = duration;
