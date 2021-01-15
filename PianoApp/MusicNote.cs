@@ -32,29 +32,29 @@ namespace PianoApp
         private MusicNoteShape mns;
         private ResourceManager rm = Properties.Resources.ResourceManager;
 
-        private int pitch;
+        private int pitch, startingY = 69;
         private String noteShape;
         private bool isDragging = false;
-        private int noteDuration;
-        //private Bitmap noteShape;
+        private double noteDuration;
+
         //private Accid _accid;
-        public MusicNote(int p,  int duration, String nShape, int x) : base()
+
+        public MusicNote(int p,  double duration, String nShape, int x, int paddingCompensation) : base()
         {
             pitch = p;
             noteDuration = duration;
             noteShape = nShape;
-           
-            Location = new Point(x, 0);
+
+            Location = new Point(x, this.NoteYPos(p));//-20 + paddingCompensation);
             
             Bitmap bmp = (Bitmap)rm.GetObject(noteShape);
-            
+            bmp = new Bitmap(bmp, new Size(30, 30));
             bmp.MakeTransparent(Color.White); 
             Image = bmp;
+
             Size = new Size(Image.Width, Image.Height);
 
-            BackColor = Color.Red;
-            if (p == 1)
-                BackColor = Color.Blue;
+            BackColor = Color.Transparent;
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -79,10 +79,10 @@ namespace PianoApp
 
         public int NoteYPos(int p) {
             int yPos = 0;
+            
+            yPos = startingY - ((p-1) * 3);
 
-            //yPos += (25-p);
-
-            return 0;
+            return yPos;
         }
     }
 }

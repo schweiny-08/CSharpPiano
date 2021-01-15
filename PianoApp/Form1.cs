@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace PianoApp
 {
@@ -18,11 +19,14 @@ namespace PianoApp
         PictureBox staffPB = new PictureBox();
         List<MusicNote> Notes = new List<MusicNote>();
 
-        int count = 0;
+        int staffPBPadding = 35;
+        double count = 0;
         int xLoc = 0;
         int yLoc = 30;
         string note = "";
         private SoundPlayer sp = new SoundPlayer();
+
+        Stopwatch stopwatch;
 
         private static System.Timers.Timer timer1;
         int[] whitePitch = { 1, 3, 5, 6, 8, 10, 12, 13, 15, 17, 18, 20, 22, 24, 25 };
@@ -31,8 +35,11 @@ namespace PianoApp
 
         public Form1()
         {
+            //timer1 = new System.Timers.Timer();
+            //timer1.Interval = 63;
+            
             InitializeComponent();
-            timer1 = new System.Timers.Timer();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -72,9 +79,12 @@ namespace PianoApp
             
             panel2.Controls.Add(staffPB);
             staffPB.Width = staff.Width;
-            staffPB.Height = staff.Height;
+            staffPB.Height = staff.Height + staffPBPadding;
+            staffPB.BackColor = Color.White;
             staffPB.BorderStyle = BorderStyle.FixedSingle;
             staffPB.Image = staff;
+            staffPB.Padding = new Padding(0, 40, 0 ,0);
+            //staffPB.Location = new Point(staffPB.Location.X, 20); ;
 
             //staffPB.Controls.Add(bar);
         }
@@ -86,9 +96,11 @@ namespace PianoApp
                 if (sender == mk)
                     if (e.Button == MouseButtons.Left)
                     {
-                        timer1.Enabled = true;
+                        //timer1.Enabled = true;
+                        //timer1.Start();
                         count = 0;
-                        timer1.Start();
+                  
+                        stopwatch = Stopwatch.StartNew();
 
                         note = mk.notePitch.ToString() + ".wav";
 
@@ -180,7 +192,7 @@ namespace PianoApp
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            count = count++;
+            count++;
         }
 
         private void button1_MouseUp(object sender, MouseEventArgs e)
@@ -191,31 +203,36 @@ namespace PianoApp
                 {
                     if (e.Button == MouseButtons.Left)
                     {
-                        timer1.Enabled = false;
+                        //timer1.Enabled = false;
+                        //timer1.Stop();
+                        //count = stopwatch.ElapsedTicks/63;
+                        count = stopwatch.Elapsed.TotalMilliseconds/64;
+                        //Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
+                        stopwatch.Stop();
                         sp.Stop();
                         string bNoteShape = null;
                         int duration = 0;
-                        if (count >= 16)
+                        if (count > 16)
                         {
                             bNoteShape = "SemiBreve";
                             duration = 16;
                         }
-                        if ((count >= 11) && (count <= 15))
+                        if ((count > 10) && (count <= 16))
                         {
                             bNoteShape = "DotMinim";
                             duration = (11 + 15) / 2;
                         }
-                        if ((count >= 6) && (count <= 10))
+                        if ((count > 6) && (count <= 10))
                         {
-                            bNoteShape = "Minim";
+                            bNoteShape = "minim";
                             duration = (6 + 10) / 2;
                         }
-                        if ((count >= 3) && (count <= 5))
+                        if ((count > 2) && (count <= 6))
                         {
                             bNoteShape = "Crotchet";
                             duration = (3 + 5) / 2;
                         }
-                        if (count == 2)
+                        if ((count > 1) && (count <= 2))
                         {
                             bNoteShape = "Quaver";
                             duration = 2;
@@ -227,9 +244,10 @@ namespace PianoApp
                         }
 
                         //Adding music note to staff 
-                        MusicNote mn = new MusicNote(mk.notePitch, duration, bNoteShape, xLoc);
+                        MusicNote mn = new MusicNote(mk.notePitch, count, bNoteShape, xLoc, staffPBPadding);
                         //mn.Location = new Point(xLoc, yLoc);
-                        this.panel2.Controls.Add(mn);
+                        //this.panel2.Controls.Add(mn);
+                        staffPB.Controls.Add(mn);
                         this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
                         Notes.Add(mn);
                         Console.WriteLine("LOCATION" + mn.Location);
