@@ -6,6 +6,8 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Media;
 
 namespace PianoApp
 {
@@ -62,9 +64,24 @@ namespace PianoApp
             base.OnPaint(pe);
         }
 
-        public void OnClick()
+        public void OnClickPlay(MusicNote mn)
         {
             //Play sound file for noteDuration milliseconds
+            //Console.WriteLine("CLICKED MOFO");
+            Stopwatch stopwatch = new Stopwatch();
+            SoundPlayer sp = new SoundPlayer();
+            //Properties.Resources.
+            sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
+            sp.Stop();
+            sp.Play();
+            stopwatch.Start();
+            //stopwatch.Elapsed.TotalMilliseconds / 64;
+            if (noteDuration <= (stopwatch.Elapsed.TotalMilliseconds / 64))
+            {
+                sp.Stop();
+                stopwatch.Stop();
+            }
+
         }
 
         public void OnRightPressEditDuration()

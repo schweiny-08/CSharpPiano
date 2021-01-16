@@ -18,6 +18,7 @@ namespace PianoApp
     {
         PictureBox staffPB = new PictureBox();
         List<MusicNote> Notes = new List<MusicNote>();
+        MusicNote mn;
 
         int staffPBPadding = 35;
         double count = 0;
@@ -89,6 +90,21 @@ namespace PianoApp
             //staffPB.Controls.Add(bar);
         }
 
+        public void button1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine(sender.GetType().ToString());
+            Console.WriteLine(mn.GetType().ToString());
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (sender.GetType().Equals(mn.GetType()))
+                {
+                    MusicNote temp = (MusicNote)sender;
+                    //Console.WriteLine("HELLO THERE");
+                    temp.OnClickPlay(temp);
+                }
+            }
+        }
 
         private void button1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -190,10 +206,7 @@ namespace PianoApp
                     }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            count++;
-        }
+       
 
         private void button1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -243,20 +256,24 @@ namespace PianoApp
                             duration = 1;
                         }
 
-                        //Adding music note to staff 
-                        MusicNote mn = new MusicNote(mk.notePitch, count, bNoteShape, xLoc, staffPBPadding);
-                        //mn.Location = new Point(xLoc, yLoc);
-                        //this.panel2.Controls.Add(mn);
-                        staffPB.Controls.Add(mn);
-                        this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
-                        Notes.Add(mn);
-                        Console.WriteLine("LOCATION" + mn.Location);
-                        xLoc += 35;
-                        Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
-                        //mn.BackColor = Color.Transparent;
+                        this.CreateMusicNote(mk, bNoteShape);
                     }
                 }
             }
+        }
+
+        public void CreateMusicNote(MusKey mk, String noteShape) {
+            //Adding music note to staff 
+            mn = new MusicNote(mk.notePitch, count, noteShape, xLoc, staffPBPadding);
+            staffPB.Controls.Add(mn);
+            this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
+
+            mn.MouseClick += new MouseEventHandler(this.button1_MouseClick);
+
+            Notes.Add(mn);
+            //Console.WriteLine("LOCATION" + mn.Location);
+            xLoc += 35;
+            Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
         }
     }
 }
