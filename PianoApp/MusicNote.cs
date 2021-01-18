@@ -33,6 +33,7 @@ namespace PianoApp
 
         private MusicNoteShape mns;
         private ResourceManager rm = Properties.Resources.ResourceManager;
+        private Stopwatch stopwatch;// = new Stopwatch();
 
         private int pitch, startingY = 69;
         private String noteShape;
@@ -64,22 +65,32 @@ namespace PianoApp
             base.OnPaint(pe);
         }
 
-        public void OnClickPlay(MusicNote mn)
+        public void OnClickPlay()
         {
             //Play sound file for noteDuration milliseconds
-            //Console.WriteLine("CLICKED MOFO");
-            Stopwatch stopwatch = new Stopwatch();
+            double passed = 0;
             SoundPlayer sp = new SoundPlayer();
-            //Properties.Resources.
+            bool isPlaying = false;
+
             sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
             sp.Stop();
+            stopwatch = Stopwatch.StartNew();
             sp.Play();
-            stopwatch.Start();
-            //stopwatch.Elapsed.TotalMilliseconds / 64;
-            if (noteDuration <= (stopwatch.Elapsed.TotalMilliseconds / 64))
+            isPlaying = true;
+
+            while (isPlaying)
             {
-                sp.Stop();
-                stopwatch.Stop();
+                passed = stopwatch.Elapsed.TotalMilliseconds / 64;
+                if (noteDuration <= passed)
+                {
+                    Console.WriteLine("IN IF");
+                    Console.WriteLine(passed + " " + noteDuration);
+
+                    sp.Stop();
+                    stopwatch.Stop();
+                    isPlaying = false;
+                    //sp.
+                }
             }
 
         }

@@ -101,7 +101,7 @@ namespace PianoApp
                 {
                     MusicNote temp = (MusicNote)sender;
                     //Console.WriteLine("HELLO THERE");
-                    temp.OnClickPlay(temp);
+                    temp.OnClickPlay();
                 }
             }
         }
