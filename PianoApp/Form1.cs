@@ -38,9 +38,9 @@ namespace PianoApp
         {
             //timer1 = new System.Timers.Timer();
             //timer1.Interval = 63;
-            
+
             InitializeComponent();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -77,14 +77,14 @@ namespace PianoApp
             Bitmap staff = Properties.Resources.Staff2;
             Bitmap bar = Properties.Resources.Bar;
 
-            
+
             panel2.Controls.Add(staffPB);
             staffPB.Width = staff.Width;
             staffPB.Height = staff.Height + staffPBPadding;
             staffPB.BackColor = Color.White;
             staffPB.BorderStyle = BorderStyle.FixedSingle;
             staffPB.Image = staff;
-            staffPB.Padding = new Padding(0, 40, 0 ,0);
+            staffPB.Padding = new Padding(0, 40, 0, 0);
             //staffPB.Location = new Point(staffPB.Location.X, 20); ;
 
             //staffPB.Controls.Add(bar);
@@ -115,7 +115,7 @@ namespace PianoApp
                         //timer1.Enabled = true;
                         //timer1.Start();
                         count = 0;
-                  
+
                         stopwatch = Stopwatch.StartNew();
 
                         note = mk.notePitch.ToString() + ".wav";
@@ -206,7 +206,7 @@ namespace PianoApp
                     }
         }
 
-       
+
 
         private void button1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -219,7 +219,7 @@ namespace PianoApp
                         //timer1.Enabled = false;
                         //timer1.Stop();
                         //count = stopwatch.ElapsedTicks/63;
-                        count = stopwatch.Elapsed.TotalMilliseconds/64;
+                        count = stopwatch.Elapsed.TotalMilliseconds / 64;
                         //Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
                         stopwatch.Stop();
                         sp.Stop();
@@ -230,27 +230,27 @@ namespace PianoApp
                             bNoteShape = "SemiBreve";
                             duration = 16;
                         }
-                        if ((count > 10) && (count <= 16))
+                        else if ((count > 10) && (count <= 16))
                         {
                             bNoteShape = "DotMinim";
                             duration = (11 + 15) / 2;
                         }
-                        if ((count > 6) && (count <= 10))
+                        else if ((count > 6) && (count <= 10))
                         {
                             bNoteShape = "minim";
                             duration = (6 + 10) / 2;
                         }
-                        if ((count > 2) && (count <= 6))
+                        else if ((count > 2) && (count <= 6))
                         {
                             bNoteShape = "Crotchet";
                             duration = (3 + 5) / 2;
                         }
-                        if ((count > 1) && (count <= 2))
+                        else if ((count > 1) && (count <= 2))
                         {
                             bNoteShape = "Quaver";
                             duration = 2;
                         }
-                        if (count <= 1)
+                        else if (count <= 1)
                         {
                             bNoteShape = "SemiQuaver";
                             duration = 1;
@@ -262,7 +262,8 @@ namespace PianoApp
             }
         }
 
-        public void CreateMusicNote(MusKey mk, String noteShape) {
+        public void CreateMusicNote(MusKey mk, String noteShape)
+        {
             //Adding music note to staff 
             mn = new MusicNote(mk.notePitch, count, noteShape, xLoc, staffPBPadding);
             staffPB.Controls.Add(mn);
