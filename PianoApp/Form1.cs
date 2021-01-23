@@ -29,6 +29,8 @@ namespace PianoApp
         string note = "";
         private SoundPlayer sp = new SoundPlayer();
         bool isPlaying = false;
+        ComboBox cb;
+        Thread CheckPlaying;
 
         Stopwatch stopwatch;
 
@@ -45,6 +47,11 @@ namespace PianoApp
             InitializeComponent();
 
             ms = new MusicStaff();
+
+            cb = TempoMenu;
+
+            CheckPlaying = new Thread(CheckIfPlaying);
+            //CheckPlaying.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -281,34 +288,54 @@ namespace PianoApp
             Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
         }
 
-        private void PlayPause_Click(object sender, EventArgs e)
+        private void Play_Click(object sender, EventArgs e)
         {
-            Button temp = (Button)sender;
-            //ms.playButton = temp;
-            
-            //A more convenient way to pass parameters to method is using lambda expressions or anonymous methods,
-            //why because you can pass the method with the number of parameters it needs.
-            //ParameterizedThreadStart is limited to methods with only ONE parameter.
+            //CheckPlaying.Abort();
 
+            Button temp = (Button)sender;
+          
+            Console.WriteLine(cb.SelectedIndex);
            
             //Console.WriteLine(sender.ToString() + " " + e.ToString());
 
-            if (isPlaying) {
-                //temp.Text = "Play";
-                isPlaying = false;
-                
-                ms.PauseMelody();
-                
-                Console.WriteLine("NOT PLAYING");
-            } else if (!isPlaying) {
+            if (!ms.IsThreadAlive()) { //!isPlaying && 
                 //temp.Text = "Pause";
                 isPlaying = true;
+                ms.AdjustTempo(cb.Items.Count , cb.SelectedIndex);
                 ms.PlayMelody(Notes);
+
+                /*if (!CheckPlaying.IsAlive)
+                    CheckPlaying = new Thread(CheckIfPlaying);*/
+
                 
+
                 Console.WriteLine("PLAYING");
             }
 
             //isPlaying = !isPlaying;
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            CheckPlaying.Abort();
+
+
+            if (ms.IsThreadAlive()) //isPlaying
+            {
+                //temp.Text = "Play";
+                isPlaying = false;
+
+                ms.PauseMelody();
+
+                Console.WriteLine("NOT PLAYING");
+            }
+        }
+
+        public void CheckIfPlaying() {
+            while (isPlaying) {
+                if (!ms.IsThreadAlive())
+                    isPlaying = false;                
+            }
         }
     }
 }

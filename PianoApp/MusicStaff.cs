@@ -28,6 +28,7 @@ namespace PianoApp
         }*/
 
         public MusicStaff() {
+            tempo = 0;
             t = new Thread(PlayThread);
         }
 
@@ -38,9 +39,9 @@ namespace PianoApp
             if (!t.IsAlive) {
                 t = new Thread(PlayThread);
             }
-            
+
             t.Start();
-            
+
         }
 
         private void PlayThread() {
@@ -48,9 +49,9 @@ namespace PianoApp
             {
                 mn.OnClickPlay();
                 currentNotePlaying = mn;
-                //System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(tempo);
             }
-
+            t.Abort();
             //PauseMelody();
             //playButton.Text = "Play";
         }
@@ -58,11 +59,45 @@ namespace PianoApp
         public void PauseMelody() {
             t.Abort();
             currentNotePlaying.StopPlaying();
-            
+
         }
 
-        public void AdjustTempo() {
-            //Adjusts tempo (Grave/Largo/Lento/Adagio/Andante/Moderato/Allegro/Presto)
+        public bool IsThreadAlive() {
+            return t.IsAlive;
         }
+
+        public void AdjustTempo(int tempoSize, int tempoIndex) {
+            //Adjusts tempo (Grave/Largo/Lento/Adagio/Andante/Moderato/Allegro/Presto)
+            int bpm = 0;
+            switch(tempoIndex){
+                case 0:
+                    bpm = 30;
+                    break;
+                case 1:
+                    bpm = 50;
+                    break;
+                case 2:
+                    bpm = 60;
+                    break;
+                case 3:
+                    bpm = 70;
+                    break;
+                case 4:
+                    bpm = 90;
+                    break;
+                case 5:
+                    bpm = 110;
+                    break;
+                case 6:
+                    bpm = 120;
+                    break;
+                case 7:
+                    bpm = 200;
+                    break;
+            }
+
+            tempo = 60000 / bpm;
+        }
+
     }
 }

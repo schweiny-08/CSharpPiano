@@ -32,7 +32,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
-            this.PlayPause = new System.Windows.Forms.Button();
+            this.StopButton = new System.Windows.Forms.Button();
+            this.TempoMenu = new System.Windows.Forms.ComboBox();
+            this.Play = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,21 +54,50 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.PlayPause);
+            this.panel2.Controls.Add(this.StopButton);
+            this.panel2.Controls.Add(this.TempoMenu);
+            this.panel2.Controls.Add(this.Play);
             this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(836, 241);
             this.panel2.TabIndex = 1;
             // 
-            // PlayPause
+            // StopButton
             // 
-            this.PlayPause.Location = new System.Drawing.Point(115, 215);
-            this.PlayPause.Name = "PlayPause";
-            this.PlayPause.Size = new System.Drawing.Size(75, 23);
-            this.PlayPause.TabIndex = 0;
-            this.PlayPause.Text = "Play/Stop";
-            this.PlayPause.UseVisualStyleBackColor = true;
-            this.PlayPause.Click += new System.EventHandler(this.PlayPause_Click);
+            this.StopButton.Location = new System.Drawing.Point(108, 215);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(75, 23);
+            this.StopButton.TabIndex = 2;
+            this.StopButton.Text = "Stop";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
+            // TempoMenu
+            // 
+            this.TempoMenu.FormattingEnabled = true;
+            this.TempoMenu.Items.AddRange(new object[] {
+            "Grave",
+            "Largo",
+            "Lento",
+            "Adagio",
+            "Andante",
+            "Moderato",
+            "Allegro",
+            "Presto"});
+            this.TempoMenu.Location = new System.Drawing.Point(229, 216);
+            this.TempoMenu.Name = "TempoMenu";
+            this.TempoMenu.Size = new System.Drawing.Size(121, 21);
+            this.TempoMenu.TabIndex = 1;
+            // 
+            // Play
+            // 
+            this.Play.Location = new System.Drawing.Point(27, 214);
+            this.Play.Name = "Play";
+            this.Play.Size = new System.Drawing.Size(75, 23);
+            this.Play.TabIndex = 0;
+            this.Play.Text = "Play";
+            this.Play.UseVisualStyleBackColor = true;
+            this.Play.Click += new System.EventHandler(this.Play_Click);
             // 
             // Form1
             // 
@@ -89,7 +120,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button PlayPause;
+        private System.Windows.Forms.Button Play;
+        private System.Windows.Forms.ComboBox TempoMenu;
+        private System.Windows.Forms.Button StopButton;
     }
 }
 
