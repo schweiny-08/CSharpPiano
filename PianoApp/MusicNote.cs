@@ -305,7 +305,7 @@ namespace PianoApp
                     Console.WriteLine("IN IF");
                     Console.WriteLine(passed + " " + noteDuration);
 
-                    sp.Stop();
+                    this.StopPlaying();
                     stopwatch.Stop();
                     isPlaying = false;
                     //sp.
@@ -321,6 +321,10 @@ namespace PianoApp
             yPos = startingY - ((p - 1) * 3);
 
             return yPos;
+        }
+
+        public void StopPlaying() {
+            sp.Stop();
         }
     }
 }

@@ -11,14 +11,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
+using System.Threading;
 
 namespace PianoApp
 {
     public partial class Form1 : Form
     {
         PictureBox staffPB = new PictureBox();
-        List<MusicNote> Notes = new List<MusicNote>();
+        private List<MusicNote> Notes = new List<MusicNote>();
         MusicNote mn;
+        MusicStaff ms;
 
         int staffPBPadding = 35;
         double count = 0;
@@ -26,6 +28,9 @@ namespace PianoApp
         int yLoc = 30;
         string note = "";
         private SoundPlayer sp = new SoundPlayer();
+        bool isPlaying = false;
+        ComboBox cb;
+        Thread CheckPlaying;
 
         Stopwatch stopwatch;
 
@@ -41,6 +46,12 @@ namespace PianoApp
 
             InitializeComponent();
 
+            ms = new MusicStaff();
+
+            cb = TempoMenu;
+
+            CheckPlaying = new Thread(CheckIfPlaying);
+            //CheckPlaying.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -275,6 +286,56 @@ namespace PianoApp
             //Console.WriteLine("LOCATION" + mn.Location);
             xLoc += 35;
             Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
+        }
+
+        private void Play_Click(object sender, EventArgs e)
+        {
+            //CheckPlaying.Abort();
+
+            Button temp = (Button)sender;
+          
+            Console.WriteLine(cb.SelectedIndex);
+           
+            //Console.WriteLine(sender.ToString() + " " + e.ToString());
+
+            if (!ms.IsThreadAlive()) { //!isPlaying && 
+                //temp.Text = "Pause";
+                isPlaying = true;
+                ms.AdjustTempo(cb.Items.Count , cb.SelectedIndex);
+                ms.PlayMelody(Notes);
+
+                /*if (!CheckPlaying.IsAlive)
+                    CheckPlaying = new Thread(CheckIfPlaying);*/
+
+                
+
+                Console.WriteLine("PLAYING");
+            }
+
+            //isPlaying = !isPlaying;
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            CheckPlaying.Abort();
+
+
+            if (ms.IsThreadAlive()) //isPlaying
+            {
+                //temp.Text = "Play";
+                isPlaying = false;
+
+                ms.PauseMelody();
+
+                Console.WriteLine("NOT PLAYING");
+            }
+        }
+
+        public void CheckIfPlaying() {
+            while (isPlaying) {
+                if (!ms.IsThreadAlive())
+                    isPlaying = false;                
+            }
         }
     }
 }
