@@ -11,14 +11,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
+using System.Threading;
 
 namespace PianoApp
 {
     public partial class Form1 : Form
     {
         PictureBox staffPB = new PictureBox();
-        List<MusicNote> Notes = new List<MusicNote>();
+        private List<MusicNote> Notes = new List<MusicNote>();
         MusicNote mn;
+        MusicStaff ms;
 
         int staffPBPadding = 35;
         double count = 0;
@@ -26,6 +28,7 @@ namespace PianoApp
         int yLoc = 30;
         string note = "";
         private SoundPlayer sp = new SoundPlayer();
+        bool isPlaying = false;
 
         Stopwatch stopwatch;
 
@@ -41,6 +44,7 @@ namespace PianoApp
 
             InitializeComponent();
 
+            ms = new MusicStaff();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -275,6 +279,36 @@ namespace PianoApp
             //Console.WriteLine("LOCATION" + mn.Location);
             xLoc += 35;
             Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
+        }
+
+        private void PlayPause_Click(object sender, EventArgs e)
+        {
+            Button temp = (Button)sender;
+            //ms.playButton = temp;
+            
+            //A more convenient way to pass parameters to method is using lambda expressions or anonymous methods,
+            //why because you can pass the method with the number of parameters it needs.
+            //ParameterizedThreadStart is limited to methods with only ONE parameter.
+
+           
+            //Console.WriteLine(sender.ToString() + " " + e.ToString());
+
+            if (isPlaying) {
+                //temp.Text = "Play";
+                isPlaying = false;
+                
+                ms.PauseMelody();
+                
+                Console.WriteLine("NOT PLAYING");
+            } else if (!isPlaying) {
+                //temp.Text = "Pause";
+                isPlaying = true;
+                ms.PlayMelody(Notes);
+                
+                Console.WriteLine("PLAYING");
+            }
+
+            //isPlaying = !isPlaying;
         }
     }
 }
