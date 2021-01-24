@@ -11,18 +11,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
+using System.IO;
 
 namespace PianoApp
 {
     public partial class Form1 : Form
     {
-        PictureBox staffPB = new PictureBox();
-        List<MusicNote> Notes = new List<MusicNote>();
+        PictureBox staffPB;
+        List<MusicNote> Notes, lNotes;
+        
         MusicNote mn;
+        MusicStaff ms;
 
-        int staffPBPadding = 35;
+        
+
+        public static int staffPBPadding = 35;
         double count = 0;
-        int xLoc = 0;
+        public static int xLoc = 0;
         int yLoc = 30;
         string note = "";
         private SoundPlayer sp = new SoundPlayer();
@@ -40,13 +45,18 @@ namespace PianoApp
             //timer1.Interval = 63;
 
             InitializeComponent();
-
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             MusKey mk;
             BlackMusKey bmk;
+            staffPB = new PictureBox();
+            Notes = new List<MusicNote>();
+            lNotes = new List<MusicNote>();
+            ms = new MusicStaff();
+            loadComboBox();
 
             //White Key
             for (int k = 0; k <= 14; k++)
@@ -88,23 +98,41 @@ namespace PianoApp
             //staffPB.Location = new Point(staffPB.Location.X, 20); ;
 
             //staffPB.Controls.Add(bar);
+
+            
         }
 
-        public void button1_MouseClick(object sender, MouseEventArgs e)
+        private ComboBox loadComboBox()
         {
-            Console.WriteLine(sender.GetType().ToString());
-            Console.WriteLine(mn.GetType().ToString());
+            string path = Environment.CurrentDirectory + "/" + "Melodies";
+            string[] files = Directory.GetFiles(path);
 
-            if (e.Button == MouseButtons.Left)
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
+
+            foreach (string file in files)
             {
-                if (sender.GetType().Equals(mn.GetType()))
-                {
-                    MusicNote temp = (MusicNote)sender;
-                    //Console.WriteLine("HELLO THERE");
-                    temp.OnClickPlay();
-                }
+                comboBox1.Items.Add(Path.GetFileNameWithoutExtension(file));
             }
+            return comboBox1;
         }
+
+
+        //public void button1_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    Console.WriteLine(sender.GetType().ToString());
+        //    Console.WriteLine(mn.GetType().ToString());
+
+        //    if (e.Button == MouseButtons.Left)
+        //    {
+        //        if (sender.GetType().Equals(mn.GetType()))
+        //        {
+        //            MusicNote temp = (MusicNote)sender;
+        //            //Console.WriteLine("HELLO THERE");
+        //            //temp.OnClickPlay();
+        //        }
+        //    }
+        //}
 
         private void button1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -265,16 +293,86 @@ namespace PianoApp
         public void CreateMusicNote(MusKey mk, String noteShape)
         {
             //Adding music note to staff 
-            mn = new MusicNote(mk.notePitch, count, noteShape, xLoc, staffPBPadding);
+            mn = new MusicNote(mk.notePitch, count, noteShape);
             staffPB.Controls.Add(mn);
             this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
 
-            mn.MouseClick += new MouseEventHandler(this.button1_MouseClick);
+            //mn.MouseClick += new MouseEventHandler(this.button1_MouseClick);
 
             Notes.Add(mn);
             //Console.WriteLine("LOCATION" + mn.Location);
             xLoc += 35;
             Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
+        }
+
+        private void load_Click(object sender, EventArgs e)
+        {
+            Notes.Clear();
+            staffPB.Controls.Clear();
+            xLoc = 0;
+
+            if (comboBox1.SelectedItem != null)
+            {
+                string melody = comboBox1.SelectedItem.ToString();
+                lNotes = ms.load(notificationMessage, panel2, staffPB, melody);
+
+                if (lNotes != null)
+                {
+                    int size = Notes.Count;
+                    for (int i = lNotes.Count - 1; i >= 0; i--)
+                    {
+                        Notes.Insert(size, lNotes[i]);
+                    }
+                    lNotes.RemoveRange(0, lNotes.Count);
+                    lNotes.Clear();
+                }
+            }
+            else
+            {
+                notificationMessage.Text = "Please select a melody to load from the drop down list.";
+            }
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "")
+            {
+                ms.save(notificationMessage, Notes, textBox1.Text);
+                loadComboBox();
+                comboBox1.SelectedItem = textBox1.Text;
+            }
+            else
+                notificationMessage.Text = "Please enter a name for the new melody.";
+        }
+
+        private void delete_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+                string melody = comboBox1.SelectedItem.ToString();
+                ms.delete(notificationMessage, melody);
+                loadComboBox();
+                comboBox1.SelectedItem = null;
+                comboBox1.Text = null;
+                textBox1.Text = null;
+            }
+            else
+                notificationMessage.Text = "Please select a melody to be deleted from the drop down list.";
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            xLoc = 0;
+            Notes.Clear();
+            textBox1.Clear();
+            comboBox1.SelectedItem = null;
+            notificationMessage.Text = null;
+            
+            staffPB.Controls.Clear();
+            if(lNotes != null)
+            {
+                lNotes.Clear();
+            }
         }
     }
 }
