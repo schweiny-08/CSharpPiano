@@ -19,7 +19,6 @@ namespace PianoApp
     public partial class Form1 : Form
     {
         PictureBox staffPB;
-        List<MusicNote> lNotes;
         //PictureBox staffPB = new PictureBox();
         private List<MusicNote> Notes = new List<MusicNote>();
         MusicNote mn;
@@ -61,7 +60,6 @@ namespace PianoApp
             BlackMusKey bmk;
             staffPB = new PictureBox();
             Notes = new List<MusicNote>();
-            lNotes = new List<MusicNote>();
             ms = new MusicStaff();
             loadComboBox();
 
@@ -325,18 +323,7 @@ namespace PianoApp
             if (comboBox1.SelectedItem != null)
             {
                 string melody = comboBox1.SelectedItem.ToString();
-                lNotes = ms.load(notificationMessage, panel2, staffPB, melody);
-
-                if (lNotes != null)
-                {
-                    int size = Notes.Count;
-                    for (int i = lNotes.Count - 1; i >= 0; i--)
-                    {
-                        Notes.Insert(size, lNotes[i]);
-                    }
-                    lNotes.RemoveRange(0, lNotes.Count);
-                    lNotes.Clear();
-                }
+                Notes = ms.load(notificationMessage, panel2, staffPB, melody);
             }
             else
             {
@@ -380,9 +367,9 @@ namespace PianoApp
             notificationMessage.Text = null;
 
             staffPB.Controls.Clear();
-            if (lNotes != null)
+            if (Notes != null)
             {
-                lNotes.Clear();
+                Notes.Clear();
             }
         }
 
