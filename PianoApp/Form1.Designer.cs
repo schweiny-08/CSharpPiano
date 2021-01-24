@@ -40,14 +40,21 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.delete = new System.Windows.Forms.Button();
+
+            this.StopButton = new System.Windows.Forms.Button();
+            this.TempoMenu = new System.Windows.Forms.ComboBox();
+            this.Play = new System.Windows.Forms.Button();
+            this.panel2.SuspendLayout();
+
             this.SuspendLayout();
             // 
             // panel1
             // 
+
             this.panel1.Location = new System.Drawing.Point(263, 397);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(547, 185);
+            this.panel1.Size = new System.Drawing.Size(410, 150);
             this.panel1.TabIndex = 0;
             // 
             // imageList1
@@ -58,11 +65,16 @@
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(16, 15);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Controls.Add(this.StopButton);
+            this.panel2.Controls.Add(this.TempoMenu);
+            this.panel2.Controls.Add(this.Play);
+            this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1115, 289);
+            this.panel2.Size = new System.Drawing.Size(836, 241);
             this.panel2.TabIndex = 1;
+
+            //this.panel2.Size = new System.Drawing.Size(1115, 289); //CONFLICT
+            //this.panel2.TabIndex = 1;                               //CONFLICT
             // 
             // load
             // 
@@ -134,11 +146,52 @@
             this.delete.Text = "Delete";
             this.delete.UseVisualStyleBackColor = true;
             this.delete.Click += new System.EventHandler(this.delete_Click);
+
+           
+            // 
+            // StopButton
+            // 
+            this.StopButton.Location = new System.Drawing.Point(108, 215);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(75, 23);
+            this.StopButton.TabIndex = 2;
+            this.StopButton.Text = "Stop";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
+            // TempoMenu
+            // 
+            this.TempoMenu.FormattingEnabled = true;
+            this.TempoMenu.Items.AddRange(new object[] {
+            "Grave",
+            "Largo",
+            "Lento",
+            "Adagio",
+            "Andante",
+            "Moderato",
+            "Allegro",
+            "Presto"});
+            this.TempoMenu.Location = new System.Drawing.Point(229, 216);
+            this.TempoMenu.Name = "TempoMenu";
+            this.TempoMenu.Size = new System.Drawing.Size(121, 21);
+            this.TempoMenu.TabIndex = 1;
+            // 
+            // Play
+            // 
+            this.Play.Location = new System.Drawing.Point(27, 214);
+            this.Play.Name = "Play";
+            this.Play.Size = new System.Drawing.Size(75, 23);
+            this.Play.TabIndex = 0;
+            this.Play.Text = "Play";
+            this.Play.UseVisualStyleBackColor = true;
+            this.Play.Click += new System.EventHandler(this.Play_Click);
+
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
             this.ClientSize = new System.Drawing.Size(1147, 593);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.load);
@@ -150,10 +203,11 @@
             this.Controls.Add(this.notificationMessage);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,6 +226,10 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button delete;
+        private System.Windows.Forms.Button Play;
+        private System.Windows.Forms.ComboBox TempoMenu;
+        private System.Windows.Forms.Button StopButton;
+
     }
 }
 

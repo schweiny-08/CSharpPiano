@@ -306,6 +306,7 @@ namespace PianoApp
             return pitch;
         }
 
+
         //public void OnClickPlay()
         //{
         //    //Play sound file for noteDuration milliseconds
@@ -335,6 +336,39 @@ namespace PianoApp
         //    }
         //}
 
+        /*
+        public void OnClickPlay()
+        {
+            //Play sound file for noteDuration milliseconds
+            double passed = 0;
+            
+            bool isPlaying = false;
+
+            sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
+            //sp.Stop();
+            stopwatch = Stopwatch.StartNew();
+            sp.Play();
+            isPlaying = true;
+
+            while (isPlaying)
+            {
+                passed = stopwatch.Elapsed.TotalMilliseconds / 64;
+                if (noteDuration <= passed)
+                {
+                    Console.WriteLine("IN IF");
+                    Console.WriteLine(passed + " " + noteDuration);
+
+                    this.StopPlaying();
+                    stopwatch.Stop();
+                    isPlaying = false;
+                    //sp.
+                }
+            }
+
+        }
+        */
+
+
         public int NoteYPos(int p)
         {
             int yPos = 0;
@@ -342,6 +376,10 @@ namespace PianoApp
             yPos = startingY - ((p - 1) * 3);
 
             return yPos;
+        }
+
+        public void StopPlaying() {
+            sp.Stop();
         }
     }
 }
