@@ -19,7 +19,6 @@ namespace PianoApp
     public partial class Form1 : Form
     {
         PictureBox staffPB;
-        List<MusicNote> lNotes;
         //PictureBox staffPB = new PictureBox();
         private List<MusicNote> Notes = new List<MusicNote>();
         MusicNote mn;
@@ -50,7 +49,7 @@ namespace PianoApp
 
             InitializeComponent();
 
-            ms = new MusicStaff();
+            //ms = new MusicStaff();
 
             cb = TempoMenu;
         }
@@ -61,7 +60,6 @@ namespace PianoApp
             BlackMusKey bmk;
             staffPB = new PictureBox();
             Notes = new List<MusicNote>();
-            lNotes = new List<MusicNote>();
             ms = new MusicStaff();
             loadComboBox();
 
@@ -105,13 +103,17 @@ namespace PianoApp
 
             //staffPB.Controls.Add(bar);
 
-            
 
+            TempoMenu.Text = "Select Tempo";
+            TempoMenu.SelectedIndex = 0;
         }
 
         private ComboBox loadComboBox()
         {
-            string path = Environment.CurrentDirectory + "/" + "Melodies";
+            string path = Environment.CurrentDirectory + "\\" + "Melodies/";
+
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+
             string[] files = Directory.GetFiles(path);
 
 
@@ -315,35 +317,27 @@ namespace PianoApp
 
         private void load_Click(object sender, EventArgs e)
         {
-            Notes.Clear();
-            staffPB.Controls.Clear();
-            xLoc = 0;
-
-            if (comboBox1.SelectedItem != null)
+            if (!ms.IsThreadAlive())
             {
-                string melody = comboBox1.SelectedItem.ToString();
-                lNotes = ms.load(notificationMessage, panel2, staffPB, melody);
+                Notes.Clear();
+                staffPB.Controls.Clear();
+                xLoc = 0;
 
-                if (lNotes != null)
+                if (comboBox1.SelectedItem != null)
                 {
-                    int size = Notes.Count;
-                    for (int i = lNotes.Count - 1; i >= 0; i--)
-                    {
-                        Notes.Insert(size, lNotes[i]);
-                    }
-                    lNotes.RemoveRange(0, lNotes.Count);
-                    lNotes.Clear();
+                    string melody = comboBox1.SelectedItem.ToString();
+                    Notes = ms.load(notificationMessage, panel2, staffPB, melody);
                 }
-            }
-            else
-            {
-                notificationMessage.Text = "Please select a melody to load from the drop down list.";
+                else
+                {
+                    notificationMessage.Text = "Please select a melody to load from the drop down list.";
+                }
             }
         }
 
         private void save_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "")
+            if (textBox1.Text != "" && !ms.IsThreadAlive())
             {
                 ms.save(notificationMessage, Notes, textBox1.Text);
                 loadComboBox();
@@ -355,7 +349,7 @@ namespace PianoApp
 
         private void delete_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem != null)
+            if (comboBox1.SelectedItem != null && !ms.IsThreadAlive())
             {
                 string melody = comboBox1.SelectedItem.ToString();
                 ms.delete(notificationMessage, melody);
@@ -370,30 +364,40 @@ namespace PianoApp
 
         private void clear_Click(object sender, EventArgs e)
         {
-            xLoc = 0;
-            Notes.Clear();
-            textBox1.Clear();
-            comboBox1.SelectedItem = null;
-            notificationMessage.Text = null;
-            
-            staffPB.Controls.Clear();
-            if(lNotes != null)
+            if (!ms.IsThreadAlive())
             {
-                lNotes.Clear();
+                xLoc = 0;
+                Notes.Clear();
+                textBox1.Clear();
+                comboBox1.SelectedItem = null;
+                notificationMessage.Text = null;
+
+                staffPB.Controls.Clear();
+                if (Notes != null)
+                {
+                    Notes.Clear();
+                }
+            }
+        }
 
         private void Play_Click(object sender, EventArgs e)
         {
-            Button temp = (Button)sender;
-          
-            Console.WriteLine(cb.SelectedIndex);
-           
-            //Console.WriteLine(sender.ToString() + " " + e.ToString());
+            if (!ms.IsThreadAlive())
+            { //!isPlaying
 
-            if (!ms.IsThreadAlive()) { //!isPlaying
+                Button temp = (Button)sender;
+          
+                Console.WriteLine(cb.SelectedIndex);
+           
+                //Console.WriteLine(sender.ToString() + " " + e.ToString());
+
+            
                 ms.AdjustTempo(cb.Items.Count , cb.SelectedIndex);
                 ms.PlayMelody(Notes);
 
                 Console.WriteLine("PLAYING");
+
+                notificationMessage.Text = "Playing";
             }
         }
 

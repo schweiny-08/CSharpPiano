@@ -307,41 +307,41 @@ namespace PianoApp
         }
 
 
-        //public void OnClickPlay()
-        //{
-        //    //Play sound file for noteDuration milliseconds
-        //    double passed = 0;
+        /*public void OnClickPlay()
+        {
+            //Play sound file for noteDuration milliseconds
+            double passed = 0;
 
-        //    bool isPlaying = false;
+            bool isplaying = false;
 
-        //    //sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
-        //    //sp.Stop();
-        //    stopwatch = Stopwatch.StartNew();
-        //    //sp.Play();
-        //    isPlaying = true;
+            //sp.stream = (system.io.stream)rm.getobject("_" + pitch.tostring());
+            //sp.stop();
+            stopwatch = Stopwatch.StartNew();
+            //sp.play();
+            isplaying = true;
 
-        //    while (isPlaying)
-        //    {
-        //        passed = stopwatch.Elapsed.TotalMilliseconds / 64;
-        //        if (noteDuration <= passed)
-        //        {
-        //            Console.WriteLine("IN IF");
-        //            Console.WriteLine(passed + " " + noteDuration);
+            while (isplaying)
+            {
+                passed = stopwatch.Elapsed.TotalMilliseconds / 64;
+                if (noteDuration <= passed)
+                {
+                    Console.WriteLine("in if");
+                    Console.WriteLine(passed + " " + noteDuration);
 
-        //            sp.Stop();
-        //            stopwatch.Stop();
-        //            isPlaying = false;
-        //            //sp.
-        //        }
-        //    }
-        //}
+                    sp.Stop();
+                    stopwatch.Stop();
+                    isplaying = false;
+                    //sp.
+                }
+            }
+        }*/
 
-        /*
+
         public void OnClickPlay()
         {
             //Play sound file for noteDuration milliseconds
             double passed = 0;
-            
+
             bool isPlaying = false;
 
             sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
@@ -366,7 +366,7 @@ namespace PianoApp
             }
 
         }
-        */
+
 
 
         public int NoteYPos(int p)

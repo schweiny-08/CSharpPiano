@@ -17,9 +17,9 @@ namespace PianoApp
     class MusicStaff : Panel
     {
 
-        List<MusicNote> lNote, Notes;
+        
         MusicNote mn;
-        Form1 form1 = new Form1();
+        Form1 form1;
 
         public Button playButton;// = new Button();
 
@@ -41,16 +41,18 @@ namespace PianoApp
 
         public MusicStaff()
         {
-            lNote = new List<MusicNote>();
+            
             tempo = 0;
             t = new Thread(PlayThread);
+
+            form1 = new Form1();
             //mn = new MusicNote(pitch, duration, shape);
         }
 
         //public void PlayOneNote() {
 
             //Play music note on mouse left click
-        }*/
+        //}
 
        /* public MusicStaff() {
             tempo = 0;
@@ -140,10 +142,8 @@ namespace PianoApp
                 FileStream Out = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
                 using (StreamWriter sw = new StreamWriter(Out))
                 {
-                    lNote.Clear();
                     Out.SetLength(0);
                     for (int i = 0; i <= iNotes.Count - 1; i++)
-                    //for (int i = iNotes.Count - 1; i >= 0; i--)
                     {
                         sw.WriteLine(iNotes[i].noteShape);
                         sw.WriteLine(iNotes[i].noteDuration);
@@ -161,6 +161,7 @@ namespace PianoApp
 
         public List<MusicNote> load(Label notificationMessage, Panel panel2, PictureBox staffPB, string fileName)
         {
+            Notes.Clear();
             notificationMessage.Text = "";
             string path = Environment.CurrentDirectory + "\\Melodies/" + fileName + ".txt";
             Directory.CreateDirectory(Path.GetDirectoryName(path));
@@ -168,14 +169,16 @@ namespace PianoApp
 
             using (StreamReader sr = new StreamReader(In))
             {
-                //int i = lNote.Count();
+                
                 while ((shape = sr.ReadLine()) != null)
                 {
                     duration = double.Parse(sr.ReadLine());
                     pitch = int.Parse(sr.ReadLine());
-                    lNote.Add(new MusicNote(pitch, duration, shape));
 
                     mn = new MusicNote(pitch, duration, shape);
+                    Notes.Add(mn);
+
+                    
                     staffPB.Controls.Add(mn);
                     panel2.Controls[panel2.Controls.Count - 1].BringToFront();
                     Form1.xLoc += 35;
@@ -183,10 +186,10 @@ namespace PianoApp
                 sr.Close();
             }
 
-            if(lNote.Count != 0)
+            if(Notes.Count != 0)
             {
                 notificationMessage.Text = "Melody \"" + fileName + "\" loaded!";
-                return lNote;
+                return Notes;
             }
             else
             {
