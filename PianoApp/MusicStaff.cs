@@ -17,9 +17,9 @@ namespace PianoApp
     class MusicStaff : Panel
     {
 
-        List<MusicNote> lNote, Notes;
+        List<MusicNote> lNote; //, Notes;
         MusicNote mn;
-        Form1 form1 = new Form1();
+        Form1 form1;
 
         public Button playButton;// = new Button();
 
@@ -44,13 +44,15 @@ namespace PianoApp
             lNote = new List<MusicNote>();
             tempo = 0;
             t = new Thread(PlayThread);
+
+            form1 = new Form1();
             //mn = new MusicNote(pitch, duration, shape);
         }
 
         //public void PlayOneNote() {
 
             //Play music note on mouse left click
-        }*/
+        //}
 
        /* public MusicStaff() {
             tempo = 0;

@@ -50,7 +50,7 @@ namespace PianoApp
 
             InitializeComponent();
 
-            ms = new MusicStaff();
+            //ms = new MusicStaff();
 
             cb = TempoMenu;
         }
@@ -111,7 +111,10 @@ namespace PianoApp
 
         private ComboBox loadComboBox()
         {
-            string path = Environment.CurrentDirectory + "/" + "Melodies";
+            string path = Environment.CurrentDirectory + "\\" + "Melodies/";
+
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+
             string[] files = Directory.GetFiles(path);
 
 
@@ -375,11 +378,13 @@ namespace PianoApp
             textBox1.Clear();
             comboBox1.SelectedItem = null;
             notificationMessage.Text = null;
-            
+
             staffPB.Controls.Clear();
-            if(lNotes != null)
+            if (lNotes != null)
             {
                 lNotes.Clear();
+            }
+        }
 
         private void Play_Click(object sender, EventArgs e)
         {
