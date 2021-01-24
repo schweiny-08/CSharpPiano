@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-
-using System.Reflection;
-
 using System.Media;
-
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
@@ -16,49 +9,32 @@ namespace PianoApp
 {
     class MusicStaff : Panel
     {
-
+        private int tempo;
+        private string shape;
+        private int pitch;
+        private double duration;
         
-        MusicNote mn;
-        Form1 form1;
-
-        public Button playButton;// = new Button();
-
-        //ComboBox tempo = new ComboBox();
-        int tempo;
-        string shape;
-        public int pitch;
-        double duration;
-        string path;
-        Button saveButton;// = new Button();
-        Button loadButton;// = new Button();
-
+        private MusicNote mn;
+        private Form1 form1;
         private List<MusicNote> Notes = new List<MusicNote>();
         private SoundPlayer sp = new SoundPlayer();
         private MusicNote currentNotePlaying;
 
         private Thread t;
 
-
         public MusicStaff()
         {
-            
             tempo = 0;
             t = new Thread(PlayThread);
-
             form1 = new Form1();
-            //mn = new MusicNote(pitch, duration, shape);
         }
 
-        //public void PlayOneNote() {
-
-            //Play music note on mouse left click
-        //}
-
-       /* public MusicStaff() {
-            tempo = 0;
-            t = new Thread(PlayThread);
+        public void setList(List<MusicNote> msl)
+        {
+            //Sets list when loaded
+            Notes = msl;
         }
-*/
+
         public void PlayMelody(List<MusicNote> notes) {
             //Play all notes on music staff
             Notes = notes;
@@ -66,30 +42,29 @@ namespace PianoApp
             if (!t.IsAlive) {
                 t = new Thread(PlayThread);
             }
-
             t.Start();
-
         }
 
         private void PlayThread() {
+            //Thread to play melody
             foreach (MusicNote mn in Notes)
             {
-                mn.OnClickPlay();
+                mn.PlayNote();
                 currentNotePlaying = mn;
                 Thread.Sleep(tempo);
             }
             t.Abort();
-            //PauseMelody();
-            //playButton.Text = "Play";
         }
 
         public void PauseMelody() {
+            //Stops playing melody thread
             t.Abort();
             currentNotePlaying.StopPlaying();
 
         }
 
         public bool IsThreadAlive() {
+            //Returns if thread is active
             return t.IsAlive;
         }
 
@@ -124,16 +99,11 @@ namespace PianoApp
             }
 
             tempo = 60000 / bpm;
-        }
-
-
-        public void setList(List<MusicNote> msl)
-        {
-            Notes = msl;
-        }
+        }     
 
         public void save(Label notificationMessage, List<MusicNote> iNotes, string fileName)
         {
+            //Saved melody currently on staff
             notificationMessage.Text = "";
             string path = Environment.CurrentDirectory + "\\Melodies/" + fileName + ".txt";
             Directory.CreateDirectory(Path.GetDirectoryName(path));
@@ -161,6 +131,7 @@ namespace PianoApp
 
         public List<MusicNote> load(Label notificationMessage, Panel panel2, PictureBox staffPB, string fileName)
         {
+            //Loads selected melody on staff
             Notes.Clear();
             notificationMessage.Text = "";
             string path = Environment.CurrentDirectory + "\\Melodies/" + fileName + ".txt";
@@ -200,6 +171,7 @@ namespace PianoApp
 
         public void delete(Label notificationMessage, string fileName)
         {
+            //Deletes current saved melody
             notificationMessage.Text = "";
             string path = Environment.CurrentDirectory + "\\Melodies\\";
             string filePath = Environment.CurrentDirectory + "\\Melodies\\" + fileName + ".txt";
@@ -207,6 +179,5 @@ namespace PianoApp
             File.Delete(filePath);
             notificationMessage.Text = "Melody \"" + fileName + "\" deleted!";
         }
-
     }
 }

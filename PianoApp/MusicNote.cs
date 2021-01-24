@@ -1,71 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Media;
 
 namespace PianoApp
 {
-    enum Accid
-    {
-        Flat,
-        Sharp,
-        Sole
-    };
-
-    enum MusicNoteShape
-    {
-        SemiBreve,
-        DotMinim,
-        Minim,
-        Crotchet,
-        Quaver,
-        SemiQuaver
-    };
-
     class MusicNote : PictureBox
     {
-        //public Point Location { get; internal set; }
-
-        SoundPlayer sp = new SoundPlayer();
-        private MusicNoteShape mns;
-        private ResourceManager rm = Properties.Resources.ResourceManager;
-        private Stopwatch stopwatch;// = new Stopwatch();
-
+        public double noteDuration;
         public int pitch, startingY = 69;
         public String noteShape;
         private bool isDragging = false;
+
+        private SoundPlayer sp = new SoundPlayer();
+        private ResourceManager rm = Properties.Resources.ResourceManager;
+        private Stopwatch stopwatch;       
         private Point point;
-        public double noteDuration;
-        bool isPlaying;
-        double passed;
-
-        //Point point;
-
-        //private Accid _accid;
 
         public MusicNote(int p, double duration, String nShape) : base()
         {
             pitch = p;
             noteDuration = duration;
             noteShape = nShape;
-            isPlaying = false;
-            passed = 0;
 
-            Location = new Point(Form1.xLoc, this.NoteYPos(p));//-20 + paddingCompensation);
+            Location = new Point(Form1.xLoc, this.NoteYPos(p));
 
             Bitmap bmp = (Bitmap)rm.GetObject(noteShape);
             bmp = new Bitmap(bmp, new Size(30, 30));
             bmp.MakeTransparent(Color.White);
             Image = bmp;
-
-            Size = new Size(Image.Width, Image.Height);
-
+            Size = new Size(Image.Width-5, Image.Height);
             BackColor = Color.Transparent;
 
             this.MouseDown += new MouseEventHandler(startDrag);
@@ -77,6 +43,7 @@ namespace PianoApp
 
         private void rbStart(object sender, MouseEventArgs e)
         {
+            //Detects right mouse button down on MusicNote object
             if (e.Button == MouseButtons.Right)
             {
                 sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
@@ -87,6 +54,7 @@ namespace PianoApp
 
         private void rbStop(object sender, MouseEventArgs e)
         {
+            //Detects right mouse button up on MusicNote object
             if (e.Button == MouseButtons.Right)
             {
                 stopwatch.Stop();
@@ -130,6 +98,7 @@ namespace PianoApp
 
         private void startDrag(object sender, MouseEventArgs e)
         {
+            //Detects left mouse button down on MusicNote object
             if (e.Button == MouseButtons.Left)
             {
                 isDragging = true;
@@ -140,6 +109,7 @@ namespace PianoApp
 
         private void stopDrag(object sender, MouseEventArgs e)
         {
+            //Detects left mouse button up on MusicNote object
             if (e.Button == MouseButtons.Left)
             {
                 isDragging = false;
@@ -148,35 +118,19 @@ namespace PianoApp
                 else if (this.Top < -3)
                     this.Top = -3;
                 pitch = getPitch(this.Top);
-                sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
-                sp.Play();
-                stopwatch = Stopwatch.StartNew();
-                isPlaying = true;
-
-                while (isPlaying)
-                {
-                    passed = stopwatch.Elapsed.TotalMilliseconds / 64;
-                    if (noteDuration <= passed)
-                    {
-                        Console.WriteLine("IN IF");
-                        Console.WriteLine(passed + " " + noteDuration);
-
-                        sp.Stop();
-                        stopwatch.Stop();
-                        isPlaying = false;
-                    }
-                }
+                
+                this.PlayNote();
             }
         }
 
         private void noteDrag(object sender, MouseEventArgs e)
         {
+            //Sets boundries for dragging and makes MusicNotes snap into place
             if (isDragging)
             {
                 if (this.Top <= 69 && this.Top >= -3)
                 {
                     this.Top = roundToNearest3(this.Top) + roundToNearest3(e.Y - point.Y);
-                    //pitch = getPitch(this.Top);
                 }
             }
         }
@@ -306,38 +260,7 @@ namespace PianoApp
             return pitch;
         }
 
-
-        /*public void OnClickPlay()
-        {
-            //Play sound file for noteDuration milliseconds
-            double passed = 0;
-
-            bool isplaying = false;
-
-            //sp.stream = (system.io.stream)rm.getobject("_" + pitch.tostring());
-            //sp.stop();
-            stopwatch = Stopwatch.StartNew();
-            //sp.play();
-            isplaying = true;
-
-            while (isplaying)
-            {
-                passed = stopwatch.Elapsed.TotalMilliseconds / 64;
-                if (noteDuration <= passed)
-                {
-                    Console.WriteLine("in if");
-                    Console.WriteLine(passed + " " + noteDuration);
-
-                    sp.Stop();
-                    stopwatch.Stop();
-                    isplaying = false;
-                    //sp.
-                }
-            }
-        }*/
-
-
-        public void OnClickPlay()
+        public void PlayNote()
         {
             //Play sound file for noteDuration milliseconds
             double passed = 0;
@@ -345,7 +268,6 @@ namespace PianoApp
             bool isPlaying = false;
 
             sp.Stream = (System.IO.Stream)rm.GetObject("_" + pitch.ToString());
-            //sp.Stop();
             stopwatch = Stopwatch.StartNew();
             sp.Play();
             isPlaying = true;
@@ -355,22 +277,16 @@ namespace PianoApp
                 passed = stopwatch.Elapsed.TotalMilliseconds / 64;
                 if (noteDuration <= passed)
                 {
-                    Console.WriteLine("IN IF");
-                    Console.WriteLine(passed + " " + noteDuration);
-
                     this.StopPlaying();
                     stopwatch.Stop();
                     isPlaying = false;
-                    //sp.
                 }
             }
-
         }
-
-
 
         public int NoteYPos(int p)
         {
+            //Returns y position of MusicNote according to pitch
             int yPos = 0;
 
             yPos = startingY - ((p - 1) * 3);
