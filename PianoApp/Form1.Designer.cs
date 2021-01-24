@@ -48,10 +48,10 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(351, 489);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.panel1.Location = new System.Drawing.Point(263, 397);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(547, 185);
+            this.panel1.Size = new System.Drawing.Size(410, 150);
             this.panel1.TabIndex = 0;
             // 
             // imageList1
@@ -65,18 +65,16 @@
             this.panel2.Controls.Add(this.StopButton);
             this.panel2.Controls.Add(this.TempoMenu);
             this.panel2.Controls.Add(this.Play);
-            this.panel2.Location = new System.Drawing.Point(16, 15);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(80, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1115, 297);
+            this.panel2.Size = new System.Drawing.Size(836, 241);
             this.panel2.TabIndex = 1;
             // 
             // StopButton
             // 
-            this.StopButton.Location = new System.Drawing.Point(144, 265);
-            this.StopButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.StopButton.Location = new System.Drawing.Point(545, 214);
             this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(100, 28);
+            this.StopButton.Size = new System.Drawing.Size(75, 23);
             this.StopButton.TabIndex = 2;
             this.StopButton.Text = "Stop";
             this.StopButton.UseVisualStyleBackColor = true;
@@ -94,18 +92,16 @@
             "Moderato",
             "Allegro",
             "Presto"});
-            this.TempoMenu.Location = new System.Drawing.Point(305, 266);
-            this.TempoMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TempoMenu.Location = new System.Drawing.Point(348, 214);
             this.TempoMenu.Name = "TempoMenu";
-            this.TempoMenu.Size = new System.Drawing.Size(160, 24);
+            this.TempoMenu.Size = new System.Drawing.Size(121, 21);
             this.TempoMenu.TabIndex = 1;
             // 
             // Play
             // 
-            this.Play.Location = new System.Drawing.Point(36, 263);
-            this.Play.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Play.Location = new System.Drawing.Point(232, 215);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(100, 28);
+            this.Play.Size = new System.Drawing.Size(75, 23);
             this.Play.TabIndex = 0;
             this.Play.Text = "Play";
             this.Play.UseVisualStyleBackColor = true;
@@ -113,10 +109,9 @@
             // 
             // load
             // 
-            this.load.Location = new System.Drawing.Point(416, 383);
-            this.load.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.load.Location = new System.Drawing.Point(312, 311);
             this.load.Name = "load";
-            this.load.Size = new System.Drawing.Size(100, 49);
+            this.load.Size = new System.Drawing.Size(75, 40);
             this.load.TabIndex = 0;
             this.load.Text = "Load";
             this.load.UseVisualStyleBackColor = true;
@@ -124,10 +119,9 @@
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(524, 383);
-            this.save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.save.Location = new System.Drawing.Point(393, 311);
             this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(100, 49);
+            this.save.Size = new System.Drawing.Size(75, 40);
             this.save.TabIndex = 2;
             this.save.Text = "Save";
             this.save.UseVisualStyleBackColor = true;
@@ -135,28 +129,25 @@
             // 
             // notificationMessage
             // 
-            this.notificationMessage.Location = new System.Drawing.Point(909, 417);
-            this.notificationMessage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.notificationMessage.Location = new System.Drawing.Point(682, 339);
             this.notificationMessage.Name = "notificationMessage";
-            this.notificationMessage.Size = new System.Drawing.Size(415, 82);
+            this.notificationMessage.Size = new System.Drawing.Size(311, 67);
             this.notificationMessage.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1065, 374);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(799, 304);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 17);
+            this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Notifications";
             // 
             // clear
             // 
-            this.clear.Location = new System.Drawing.Point(740, 383);
-            this.clear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clear.Location = new System.Drawing.Point(555, 311);
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(100, 49);
+            this.clear.Size = new System.Drawing.Size(75, 40);
             this.clear.TabIndex = 5;
             this.clear.Text = "Clear";
             this.clear.UseVisualStyleBackColor = true;
@@ -165,26 +156,23 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(643, 450);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Location = new System.Drawing.Point(482, 366);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(217, 24);
+            this.comboBox1.Size = new System.Drawing.Size(164, 21);
             this.comboBox1.TabIndex = 6;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(416, 450);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(312, 366);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(217, 22);
+            this.textBox1.Size = new System.Drawing.Size(164, 20);
             this.textBox1.TabIndex = 7;
             // 
             // delete
             // 
-            this.delete.Location = new System.Drawing.Point(632, 383);
-            this.delete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.delete.Location = new System.Drawing.Point(474, 311);
             this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(100, 49);
+            this.delete.Size = new System.Drawing.Size(75, 40);
             this.delete.TabIndex = 8;
             this.delete.Text = "Delete";
             this.delete.UseVisualStyleBackColor = true;
@@ -192,9 +180,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1309, 730);
+            this.ClientSize = new System.Drawing.Size(982, 593);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.load);
             this.Controls.Add(this.textBox1);
@@ -205,7 +193,7 @@
             this.Controls.Add(this.notificationMessage);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
