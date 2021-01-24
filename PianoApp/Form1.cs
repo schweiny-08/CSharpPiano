@@ -1,56 +1,36 @@
 ﻿using System;
-using System.Timers;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
+
 
 namespace PianoApp
 {
     public partial class Form1 : Form
     {
-        PictureBox staffPB;
-        //PictureBox staffPB = new PictureBox();
-        private List<MusicNote> Notes = new List<MusicNote>();
-        MusicNote mn;
-        MusicStaff ms;
-
-        
-
         public static int staffPBPadding = 35;
-        double count = 0;
+        private double count = 0;
         public static int xLoc = 0;
-        //int yLoc = 30;
-        //int xLoc = 0;
-        string note = "";
+        private string note = "";
+
         private SoundPlayer sp = new SoundPlayer();
-        bool isPlaying = false;
-        ComboBox cb;
+        private ComboBox cb;
+        private PictureBox staffPB;
+        private List<MusicNote> Notes = new List<MusicNote>();
+        private MusicNote mn;
+        private MusicStaff ms;
+        private Stopwatch stopwatch;
 
-        Stopwatch stopwatch;
-
-        int[] whitePitch = { 1, 3, 5, 6, 8, 10, 12, 13, 15, 17, 18, 20, 22, 24, 25 };
-        int[] blackPitch = { 2, 4, 7, 9, 11, 14, 16, 19, 21, 23 };
-        int[] xPos = { 10, 30, 70, 90, 110, 150, 170, 210, 230, 250 };
+        private int[] whitePitch = { 1, 3, 5, 6, 8, 10, 12, 13, 15, 17, 18, 20, 22, 24, 25 };
+        private int[] blackPitch = { 2, 4, 7, 9, 11, 14, 16, 19, 21, 23 };
+        private int[] xPos = { 10, 30, 70, 90, 110, 150, 170, 210, 230, 250 };
 
         public Form1()
         {
-            //timer1 = new System.Timers.Timer();
-            //timer1.Interval = 63;
-
             InitializeComponent();
-
-            //ms = new MusicStaff();
-
             cb = TempoMenu;
         }
 
@@ -87,7 +67,6 @@ namespace PianoApp
             }
 
             //Music Staff
-
             Bitmap staff = Properties.Resources.Staff2;
             Bitmap bar = Properties.Resources.Bar;
 
@@ -98,57 +77,33 @@ namespace PianoApp
             staffPB.BorderStyle = BorderStyle.FixedSingle;
             staffPB.Image = staff;
             staffPB.Padding = new Padding(0, 40, 0, 0);
-
-            //staffPB.Location = new Point(staffPB.Location.X, 20); ;
-
-            //staffPB.Controls.Add(bar);
-
-
+            
+            //Tempo menu
             TempoMenu.Text = "Select Tempo";
             TempoMenu.SelectedIndex = 0;
         }
 
         private ComboBox loadComboBox()
         {
+            //Controls load drop down menu
             string path = Environment.CurrentDirectory + "\\" + "Melodies/";
-
             Directory.CreateDirectory(Path.GetDirectoryName(path));
-
             string[] files = Directory.GetFiles(path);
-
 
             comboBox1.Items.Clear();
             comboBox1.Text = "";
 
             foreach (string file in files)
-
-            //if (e.Button == MouseButtons.Left && !ms.IsThreadAlive())
-
             {
                 comboBox1.Items.Add(Path.GetFileNameWithoutExtension(file));
             }
+
             return comboBox1;
         }
 
-
-        //public void button1_MouseClick(object sender, MouseEventArgs e)
-        //{
-        //    Console.WriteLine(sender.GetType().ToString());
-        //    Console.WriteLine(mn.GetType().ToString());
-
-        //    if (e.Button == MouseButtons.Left)
-        //    {
-        //        if (sender.GetType().Equals(mn.GetType()))
-        //        {
-        //            MusicNote temp = (MusicNote)sender;
-        //            //Console.WriteLine("HELLO THERE");
-        //            //temp.OnClickPlay();
-        //        }
-        //    }
-        //}
-
         private void button1_MouseDown(object sender, MouseEventArgs e)
         {
+            //Detects left mouse button down on piano key
             if (!ms.IsThreadAlive())
             {
                 foreach (MusKey mk in this.panel1.Controls)
@@ -248,6 +203,7 @@ namespace PianoApp
 
         private void button1_MouseUp(object sender, MouseEventArgs e)
         {
+            //Detects left mouse button up on piano key
             if (!ms.IsThreadAlive())
             {
                 foreach (MusKey mk in this.panel1.Controls)
@@ -261,36 +217,29 @@ namespace PianoApp
                             stopwatch.Stop();
                             sp.Stop();
                             string bNoteShape = null;
-                            int duration = 0;
                             if (count > 16)
                             {
-                                bNoteShape = "SemiBreve";
-                                duration = 16;
+                                bNoteShape = "SemiBreve";                               
                             }
                             else if ((count > 10) && (count <= 16))
                             {
                                 bNoteShape = "DotMinim";
-                                duration = (11 + 15) / 2;
                             }
                             else if ((count > 6) && (count <= 10))
                             {
                                 bNoteShape = "minim";
-                                duration = (6 + 10) / 2;
                             }
                             else if ((count > 2) && (count <= 6))
                             {
                                 bNoteShape = "Crotchet";
-                                duration = (3 + 5) / 2;
                             }
                             else if ((count > 1) && (count <= 2))
                             {
                                 bNoteShape = "Quaver";
-                                duration = 2;
                             }
                             else if (count <= 1)
                             {
                                 bNoteShape = "SemiQuaver";
-                                duration = 1;
                             }
 
                             this.CreateMusicNote(mk, bNoteShape);
@@ -307,16 +256,15 @@ namespace PianoApp
             staffPB.Controls.Add(mn);
             this.panel2.Controls[this.panel2.Controls.Count - 1].BringToFront();
 
-            //mn.MouseClick += new MouseEventHandler(this.button1_MouseClick);
-
             Notes.Add(mn);
-            xLoc += 35;
+            xLoc += mn.Width;
             Console.WriteLine("BUTTON PRESSED:" + mk.notePitch + "NOTES SIZE:" + Notes.Count + "XLOCATION:" + xLoc + "TIMERCOUNT:" + count);
         }
 
 
         private void load_Click(object sender, EventArgs e)
         {
+            //Load selected saved file
             if (!ms.IsThreadAlive())
             {
                 Notes.Clear();
@@ -337,33 +285,42 @@ namespace PianoApp
 
         private void save_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "" && !ms.IsThreadAlive())
+            //Save current melody
+            if (!ms.IsThreadAlive())
             {
-                ms.save(notificationMessage, Notes, textBox1.Text);
-                loadComboBox();
-                comboBox1.SelectedItem = textBox1.Text;
+                if (textBox1.Text != "")
+                {
+                    ms.save(notificationMessage, Notes, textBox1.Text);
+                    loadComboBox();
+                    comboBox1.SelectedItem = textBox1.Text;
+                }
+                else
+                    notificationMessage.Text = "Please enter a name for the new melody.";
             }
-            else
-                notificationMessage.Text = "Please enter a name for the new melody.";
         }
 
         private void delete_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem != null && !ms.IsThreadAlive())
+            //Delete current melody
+            if (!ms.IsThreadAlive())
             {
-                string melody = comboBox1.SelectedItem.ToString();
-                ms.delete(notificationMessage, melody);
-                loadComboBox();
-                comboBox1.SelectedItem = null;
-                comboBox1.Text = null;
-                textBox1.Text = null;
+                if (comboBox1.SelectedItem != null)
+                {
+                    string melody = comboBox1.SelectedItem.ToString();
+                    ms.delete(notificationMessage, melody);
+                    loadComboBox();
+                    comboBox1.SelectedItem = null;
+                    comboBox1.Text = null;
+                    textBox1.Text = null;
+                }
+                else
+                    notificationMessage.Text = "Please select a melody to be deleted from the drop down list.";
             }
-            else
-                notificationMessage.Text = "Please select a melody to be deleted from the drop down list.";
         }
 
         private void clear_Click(object sender, EventArgs e)
         {
+            //Clear current melody
             if (!ms.IsThreadAlive())
             {
                 xLoc = 0;
@@ -382,20 +339,13 @@ namespace PianoApp
 
         private void Play_Click(object sender, EventArgs e)
         {
+            //Play current melody
             if (!ms.IsThreadAlive())
-            { //!isPlaying
-
+            { 
                 Button temp = (Button)sender;
-          
-                Console.WriteLine(cb.SelectedIndex);
-           
-                //Console.WriteLine(sender.ToString() + " " + e.ToString());
-
-            
+                
                 ms.AdjustTempo(cb.Items.Count , cb.SelectedIndex);
                 ms.PlayMelody(Notes);
-
-                Console.WriteLine("PLAYING");
 
                 notificationMessage.Text = "Playing";
             }
@@ -403,12 +353,12 @@ namespace PianoApp
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            if (ms.IsThreadAlive()) //isPlaying
+            //Stop playing melody
+            if (ms.IsThreadAlive())
             {
                 ms.PauseMelody();
 
-                Console.WriteLine("NOT PLAYING");
-
+                notificationMessage.Text = "";
             }
         }
     }
