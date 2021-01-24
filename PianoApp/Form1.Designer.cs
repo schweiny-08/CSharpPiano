@@ -48,7 +48,7 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(263, 397);
+            this.panel1.Location = new System.Drawing.Point(341, 432);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(410, 150);
@@ -65,14 +65,14 @@
             this.panel2.Controls.Add(this.StopButton);
             this.panel2.Controls.Add(this.TempoMenu);
             this.panel2.Controls.Add(this.Play);
-            this.panel2.Location = new System.Drawing.Point(80, 12);
+            this.panel2.Location = new System.Drawing.Point(99, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(836, 241);
             this.panel2.TabIndex = 1;
             // 
             // StopButton
             // 
-            this.StopButton.Location = new System.Drawing.Point(545, 214);
+            this.StopButton.Location = new System.Drawing.Point(502, 212);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(75, 23);
             this.StopButton.TabIndex = 2;
@@ -92,14 +92,14 @@
             "Moderato",
             "Allegro",
             "Presto"});
-            this.TempoMenu.Location = new System.Drawing.Point(348, 214);
+            this.TempoMenu.Location = new System.Drawing.Point(339, 214);
             this.TempoMenu.Name = "TempoMenu";
             this.TempoMenu.Size = new System.Drawing.Size(121, 21);
             this.TempoMenu.TabIndex = 1;
             // 
             // Play
             // 
-            this.Play.Location = new System.Drawing.Point(232, 215);
+            this.Play.Location = new System.Drawing.Point(213, 212);
             this.Play.Name = "Play";
             this.Play.Size = new System.Drawing.Size(75, 23);
             this.Play.TabIndex = 0;
@@ -119,7 +119,7 @@
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(393, 311);
+            this.save.Location = new System.Drawing.Point(410, 311);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 40);
             this.save.TabIndex = 2;
@@ -145,7 +145,7 @@
             // 
             // clear
             // 
-            this.clear.Location = new System.Drawing.Point(555, 311);
+            this.clear.Location = new System.Drawing.Point(601, 311);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(75, 40);
             this.clear.TabIndex = 5;
@@ -156,7 +156,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(482, 366);
+            this.comboBox1.Location = new System.Drawing.Point(512, 366);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(164, 21);
             this.comboBox1.TabIndex = 6;
@@ -170,7 +170,7 @@
             // 
             // delete
             // 
-            this.delete.Location = new System.Drawing.Point(474, 311);
+            this.delete.Location = new System.Drawing.Point(500, 311);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(75, 40);
             this.delete.TabIndex = 8;
@@ -193,7 +193,7 @@
             this.Controls.Add(this.notificationMessage);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
